@@ -1,0 +1,163 @@
+{
+  "name": "overloaded_target_at_risk",
+  "horizon_slots": 48,
+  "slot_minutes": 30,
+  "contract_kva": null,
+  "power_factor": 0.95,
+  "machines": [
+    {
+      "id": "M1",
+      "run_kw": 20.0,
+      "idle_kw": 8.0,
+      "restart_kwh": 8.0,
+      "warmup_slots": 0,
+      "min_off_slots": 0,
+      "max_switch_cycles": null,
+      "initial_state": "idle",
+      "downtime": []
+    },
+    {
+      "id": "M2",
+      "run_kw": 20.0,
+      "idle_kw": 8.0,
+      "restart_kwh": 8.0,
+      "warmup_slots": 0,
+      "min_off_slots": 0,
+      "max_switch_cycles": null,
+      "initial_state": "idle",
+      "downtime": []
+    }
+  ],
+  "jobs": [
+    {
+      "id": "J1",
+      "duration_slots": 12,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J2",
+      "duration_slots": 12,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J3",
+      "duration_slots": 12,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J4",
+      "duration_slots": 12,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J5",
+      "duration_slots": 12,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J6",
+      "duration_slots": 12,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J7",
+      "duration_slots": 12,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J8",
+      "duration_slots": 12,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J9",
+      "duration_slots": 12,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J10",
+      "duration_slots": 12,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    }
+  ]
+}

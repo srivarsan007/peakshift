@@ -1,0 +1,13 @@
+{
+  "name": "my_first_plant",
+  "machines": [
+    {"id": "M1", "run_kw": 20, "idle_kw": 8, "restart_kwh": 8},
+    {"id": "M2", "run_kw": 20, "idle_kw": 8, "restart_kwh": 8}
+  ],
+  "jobs": [
+    {"id": "J1", "duration_slots": 4},
+    {"id": "J2", "duration_slots": 6},
+    {"id": "J3", "duration_slots": 3},
+    {"id": "J4", "duration_slots": 5}
+  ]
+}

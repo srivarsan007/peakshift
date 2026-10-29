@@ -1,0 +1,4 @@
+id,run_kw,idle_kw,restart_kwh,warmup_slots,min_off_slots,max_switch_cycles,initial_state,downtime
+M1,20,8,8,1,2,,idle,
+M2,20,8,8,0,0,3,idle,20-26
+M3,30,12,15,2,2,,idle,10-14;30-34

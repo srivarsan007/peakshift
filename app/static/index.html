@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PeakShift — Factory Energy Optimizer</title>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/app.css">
+  <!-- Local Plotly.js — zero CDN, fully offline -->
+  <script src="vendor/plotly.min.js"></script>
+</head>
+<body>
+
+  <!-- Skip-to-main (keyboard / screen reader) -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ══ GLOBAL HEADER ══════════════════════════════════════════════════════ -->
+  <header id="site-header" role="banner">
+    <div class="header-inner">
+      <!-- Brand -->
+      <a href="#load" class="brand" aria-label="PeakShift home">
+        <div class="brand-logo" aria-hidden="true">⚡</div>
+        <div>
+          <div class="brand-text">PeakShift</div>
+          <div class="brand-subtitle">Industrial Energy Scheduler</div>
+        </div>
+      </a>
+
+      <!-- Right cluster (on phone: stays on top row next to brand) -->
+      <div class="header-right">
+        <!-- Plant chip — hidden until a plant is loaded -->
+        <div id="plant-chip" class="plant-chip" style="display:none;"
+          aria-live="polite" aria-label="Current plant" title="Current plant">
+          <span class="plant-dot" aria-hidden="true"></span>
+          <span id="plant-chip-text">No plant loaded</span>
+        </div>
+
+        <!-- Global Run optimization button -->
+        <button id="btn-global-run" disabled
+          aria-label="Run optimization"
+          title="Load a plant first, then run optimization">
+          Run optimization
+        </button>
+
+        <!-- Light / dark theme toggle -->
+        <button id="btn-theme-toggle" aria-label="Toggle light/dark theme" title="Toggle theme">
+          🌙
+        </button>
+
+        <!-- Server / offline status -->
+        <div id="server-status-pill" class="status-pill badge-info"
+          aria-live="polite" aria-label="Server status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span id="server-status-text">Connecting…</span>
+        </div>
+      </div>
+
+      <!-- Navigation tabs (on phone: wraps to full-width row 2 with edge fades) -->
+      <div class="header-nav-wrap">
+        <div class="nav-edge-fade nav-edge-left"  aria-hidden="true"></div>
+        <nav class="nav-links" id="main-nav" aria-label="Main navigation" role="tablist">
+          <a href="#load"    class="nav-link" data-page="load"    role="tab" aria-selected="true" aria-current="page">
+            <span class="nav-check" aria-hidden="true">✓</span>Load &amp; config
+          </a>
+          <a href="#compare" class="nav-link" data-page="compare" role="tab" aria-selected="false">
+            <span class="nav-check" aria-hidden="true">✓</span>Compare &amp; verify
+          </a>
+          <a href="#disrupt" class="nav-link" data-page="disrupt" role="tab" aria-selected="false">
+            <span class="nav-check" aria-hidden="true">✓</span>Disruption console
+          </a>
+          <a href="#sweep"   class="nav-link" data-page="sweep"   role="tab" aria-selected="false">
+            <span class="nav-check" aria-hidden="true">✓</span>Sweep &amp; cap
+          </a>
+          <a href="#reasons" class="nav-link" data-page="reasons" role="tab" aria-selected="false">
+            <span class="nav-check" aria-hidden="true">✓</span>Rationale &amp; audit
+          </a>
+        </nav>
+        <div class="nav-edge-fade nav-edge-right" aria-hidden="true"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══ MAIN CONTENT ═══════════════════════════════════════════════════════ -->
+  <main class="container" id="main-content" tabindex="-1">
+
+    <!-- Screen-reader live status region -->
+    <div id="sr-live" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Server wake-up notice -->
+    <div id="wake-notice" class="banner banner-warning" style="display:none;"
+      role="status" aria-live="polite">
+      <div><strong>Server is waking up:</strong> The first request may take a few seconds on cold start.</div>
+    </div>
+
+    <section id="page-load"    class="page-view" role="region" aria-label="Load and configure plant"></section>
+    <section id="page-compare" class="page-view" role="region" aria-label="Compare and verify schedules"></section>
+    <section id="page-disrupt" class="page-view" role="region" aria-label="Disruption console"></section>
+    <section id="page-sweep"   class="page-view" role="region" aria-label="Sweep and peak cap"></section>
+    <section id="page-reasons" class="page-view" role="region" aria-label="Rationale and audit"></section>
+
+  </main>
+
+  <!-- ══ FOOTER ════════════════════════════════════════════════════════════ -->
+  <footer>
+    PeakShift &bull; energy-aware production scheduling &bull; Tamil Nadu HT-I tariff (editable)
+  </footer>
+
+  <!-- ══ APP BOOTSTRAP ═════════════════════════════════════════════════════ -->
+  <script type="module">
+    import { api }             from "./js/api.js";
+    import { store }           from "./js/state.js";
+    import { initLoadPage }    from "./js/pages/load.js";
+    import { initComparePage } from "./js/pages/compare.js";
+    import { initDisruptPage } from "./js/pages/disrupt.js";
+    import { initSweepPage }   from "./js/pages/sweep.js";
+    import { initReasonsPage } from "./js/pages/reasons.js";
+
+    window.__PEAKSHIFT_STORE__ = store;
+    window.__PEAKSHIFT_API__   = api;
+
+    // ── Theme: read saved preference, apply before first paint ──────────────
+    (function applyTheme() {
+      let theme = "dark";
+      try {
+        const p = new URLSearchParams(window.location.search);
+        theme = p.get("theme") || localStorage.getItem("ps-theme") || "dark";
+      } catch (_) {}
+      document.documentElement.setAttribute("data-theme", theme);
+      const btn = document.getElementById("btn-theme-toggle");
+      if (btn) btn.textContent = theme === "dark" ? "🌙" : "☀️";
+    })();
+
+    document.getElementById("btn-theme-toggle")?.addEventListener("click", () => {
+      const html    = document.documentElement;
+      const current = html.getAttribute("data-theme") || "dark";
+      const next    = current === "dark" ? "light" : "dark";
+      html.setAttribute("data-theme", next);
+      document.getElementById("btn-theme-toggle").textContent = next === "dark" ? "🌙" : "☀️";
+      try { localStorage.setItem("ps-theme", next); } catch (_) {}
+    });
+
+    // ── Nav result checkmarks — driven by store ─────────────────────────────
+    function refreshNavChecks() {
+      const s = store.get();
+      const checks = {
+        load:    !!(s.plant),
+        compare: !!(s.lastResult),
+        disrupt: !!(s.disruptResult),
+        sweep:   !!(s.sweepResult || s.paretoResult),
+        reasons: !!(s.lastResult),
+      };
+      Object.entries(checks).forEach(([page, has]) => {
+        const link = document.querySelector(`.nav-link[data-page="${page}"]`);
+        if (link) link.classList.toggle("has-results", has);
+      });
+    }
+    store.subscribe(refreshNavChecks);
+
+    // ── Plant chip in header ─────────────────────────────────────────────────
+    function refreshPlantChip() {
+      const s        = store.get();
+      const chip     = document.getElementById("plant-chip");
+      const chipText = document.getElementById("plant-chip-text");
+      if (!chip || !chipText) return;
+      if (s.plant) {
+        const preset = s.plant.preset || s.plant.name || "Custom";
+        chipText.textContent =
+          `${preset} · ${s.plant.machines?.length ?? 0}M · ${s.plant.jobs?.length ?? 0}J`;
+        chip.style.display = "inline-flex";
+      } else {
+        chip.style.display = "none";
+      }
+    }
+    store.subscribe(refreshPlantChip);
+
+    // ── Global "Run optimization" button ────────────────────────────────────
+    function refreshGlobalRunBtn() {
+      const s   = store.get();
+      const btn = document.getElementById("btn-global-run");
+      if (!btn) return;
+      btn.disabled = !s.plant;
+      btn.title    = s.plant
+        ? "Run optimization for the current plant"
+        : "Load a plant on the Load & config page first";
+    }
+    store.subscribe(refreshGlobalRunBtn);
+
+    document.getElementById("btn-global-run")?.addEventListener("click", () => {
+      const hash = window.location.hash;
+      if (hash !== "#load") {
+        window.location.hash = "#load";
+        setTimeout(() => document.getElementById("btn-run-opt")?.click(), 80);
+      } else {
+        document.getElementById("btn-run-opt")?.click();
+      }
+    });
+
+    // ── Hash router ──────────────────────────────────────────────────────────
+    function handleRouting() {
+      const hash    = window.location.hash || "#load";
+      const pageKey = hash.replace("#", "");
+
+      document.querySelectorAll(".nav-link").forEach(link => {
+        const isActive = link.dataset.page === pageKey;
+        link.classList.toggle("active", isActive);
+        link.setAttribute("aria-current", isActive ? "page" : "false");
+        link.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+      document.querySelectorAll(".page-view").forEach(pv => {
+        pv.classList.toggle("active", pv.id === `page-${pageKey}`);
+      });
+      window.scrollTo(0, 0);
+
+      // Scroll the active tab into view on mobile
+      requestAnimationFrame(() => {
+        const activeLink = document.querySelector(`.nav-link[data-page="${pageKey}"]`);
+        const nav        = document.getElementById("main-nav");
+        if (activeLink && nav) {
+          activeLink.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+          setTimeout(updateNavFades, 300);
+        }
+      });
+
+      // Announce page change to screen readers
+      const srLive = document.getElementById("sr-live");
+      if (srLive) {
+        const label = document.querySelector(`#page-${pageKey}`)?.getAttribute("aria-label") || pageKey;
+        srLive.textContent = `Navigated to ${label}`;
+        setTimeout(() => { srLive.textContent = ""; }, 2000);
+      }
+    }
+
+    // ── Server health check ─────────────────────────────────────────────────
+    async function checkServerHealth() {
+      const pill      = document.getElementById("server-status-pill");
+      const text      = document.getElementById("server-status-text");
+      const wake      = document.getElementById("wake-notice");
+      const wakeTimer = setTimeout(() => { if (wake) wake.style.display = "flex"; }, 3500);
+      try {
+        await api.health();
+        clearTimeout(wakeTimer);
+        if (wake) wake.style.display = "none";
+        if (pill) pill.className = "status-pill badge-success";
+        if (text) text.textContent = "Offline ready";
+        store.set({ serverStatus: "ok" });
+      } catch (err) {
+        clearTimeout(wakeTimer);
+        if (pill) pill.className = "status-pill badge-danger";
+        if (text) text.textContent = "Server offline";
+        store.set({ serverStatus: "error" });
+      }
+    }
+
+    // ── Edge-fade: show/hide based on nav scroll position ───────────────────
+    function updateNavFades() {
+      const nav   = document.getElementById("main-nav");
+      const left  = document.querySelector(".nav-edge-fade.nav-edge-left");
+      const right = document.querySelector(".nav-edge-fade.nav-edge-right");
+      if (!nav) return;
+      if (left)  left.classList.toggle("visible",  nav.scrollLeft > 6);
+      if (right) right.classList.toggle("visible", nav.scrollLeft + nav.clientWidth < nav.scrollWidth - 6);
+    }
+
+    // ── Boot ────────────────────────────────────────────────────────────────
+    function boot() {
+      initLoadPage();
+      initComparePage();
+      initDisruptPage();
+      initSweepPage();
+      initReasonsPage();
+
+      window.addEventListener("hashchange", handleRouting);
+      handleRouting();
+      checkServerHealth();
+      refreshNavChecks();
+      refreshPlantChip();
+      refreshGlobalRunBtn();
+
+      // Nav scroll fades
+      const nav = document.getElementById("main-nav");
+      if (nav) {
+        nav.addEventListener("scroll", updateNavFades, { passive: true });
+        window.addEventListener("resize", updateNavFades, { passive: true });
+        setTimeout(updateNavFades, 100);
+      }
+
+      // Auto-run hook (used by CDP capture scripts)
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get("autorun") === "1") {
+        const unsubscribe = store.subscribe(() => {
+          const s = store.get();
+          if (s.plant && s.tariff && !s.lastResult) {
+            unsubscribe();
+            setTimeout(() => document.getElementById("btn-run-opt")?.click(), 100);
+          }
+        });
+      }
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", boot);
+    } else {
+      boot();
+    }
+  </script>
+
+</body>
+</html>

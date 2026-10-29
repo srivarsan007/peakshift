@@ -1,0 +1,796 @@
+{
+  "name": "food_lines_80util_seed5",
+  "horizon_slots": 48,
+  "slot_minutes": 30,
+  "contract_kva": null,
+  "power_factor": 0.95,
+  "machines": [
+    {
+      "id": "M1",
+      "run_kw": 30.0,
+      "idle_kw": 12.0,
+      "restart_kwh": 15.0,
+      "warmup_slots": 2,
+      "min_off_slots": 2,
+      "max_switch_cycles": null,
+      "initial_state": "idle",
+      "downtime": []
+    },
+    {
+      "id": "M2",
+      "run_kw": 30.0,
+      "idle_kw": 12.0,
+      "restart_kwh": 15.0,
+      "warmup_slots": 2,
+      "min_off_slots": 2,
+      "max_switch_cycles": null,
+      "initial_state": "idle",
+      "downtime": []
+    },
+    {
+      "id": "M3",
+      "run_kw": 30.0,
+      "idle_kw": 12.0,
+      "restart_kwh": 15.0,
+      "warmup_slots": 2,
+      "min_off_slots": 2,
+      "max_switch_cycles": null,
+      "initial_state": "idle",
+      "downtime": [
+        [
+          20,
+          28
+        ]
+      ]
+    },
+    {
+      "id": "M4",
+      "run_kw": 30.0,
+      "idle_kw": 12.0,
+      "restart_kwh": 15.0,
+      "warmup_slots": 2,
+      "min_off_slots": 2,
+      "max_switch_cycles": null,
+      "initial_state": "idle",
+      "downtime": []
+    },
+    {
+      "id": "M5",
+      "run_kw": 30.0,
+      "idle_kw": 12.0,
+      "restart_kwh": 15.0,
+      "warmup_slots": 2,
+      "min_off_slots": 2,
+      "max_switch_cycles": null,
+      "initial_state": "idle",
+      "downtime": []
+    },
+    {
+      "id": "M6",
+      "run_kw": 30.0,
+      "idle_kw": 12.0,
+      "restart_kwh": 15.0,
+      "warmup_slots": 2,
+      "min_off_slots": 2,
+      "max_switch_cycles": null,
+      "initial_state": "idle",
+      "downtime": []
+    }
+  ],
+  "jobs": [
+    {
+      "id": "J1",
+      "duration_slots": 7,
+      "release_slot": 30,
+      "deadline_slot": 41,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 1,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J2",
+      "duration_slots": 8,
+      "release_slot": 34,
+      "deadline_slot": 46,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 1,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J3",
+      "duration_slots": 7,
+      "release_slot": 38,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 1,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J4",
+      "duration_slots": 4,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J5",
+      "duration_slots": 3,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J6",
+      "duration_slots": 6,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J7",
+      "duration_slots": 3,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J8",
+      "duration_slots": 4,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J9",
+      "duration_slots": 4,
+      "release_slot": 28,
+      "deadline_slot": 43,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J10",
+      "duration_slots": 4,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 1,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J11",
+      "duration_slots": 3,
+      "release_slot": 10,
+      "deadline_slot": 17,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J12",
+      "duration_slots": 5,
+      "release_slot": 21,
+      "deadline_slot": 42,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J13",
+      "duration_slots": 8,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J14",
+      "duration_slots": 8,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J15",
+      "duration_slots": 6,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J16",
+      "duration_slots": 4,
+      "release_slot": 19,
+      "deadline_slot": 30,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J17",
+      "duration_slots": 7,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J18",
+      "duration_slots": 8,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J19",
+      "duration_slots": 5,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J20",
+      "duration_slots": 6,
+      "release_slot": 1,
+      "deadline_slot": 13,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J21",
+      "duration_slots": 8,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J22",
+      "duration_slots": 7,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J23",
+      "duration_slots": 7,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J24",
+      "duration_slots": 8,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J25",
+      "duration_slots": 4,
+      "release_slot": 14,
+      "deadline_slot": 33,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 1,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J26",
+      "duration_slots": 5,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J27",
+      "duration_slots": 5,
+      "release_slot": 24,
+      "deadline_slot": 42,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J28",
+      "duration_slots": 5,
+      "release_slot": 13,
+      "deadline_slot": 21,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J29",
+      "duration_slots": 5,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J30",
+      "duration_slots": 4,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J31",
+      "duration_slots": 7,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 1,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J32",
+      "duration_slots": 5,
+      "release_slot": 19,
+      "deadline_slot": 28,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J33",
+      "duration_slots": 6,
+      "release_slot": 25,
+      "deadline_slot": 42,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J34",
+      "duration_slots": 3,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J35",
+      "duration_slots": 5,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J36",
+      "duration_slots": 3,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J37",
+      "duration_slots": 6,
+      "release_slot": 18,
+      "deadline_slot": 37,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J38",
+      "duration_slots": 4,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J39",
+      "duration_slots": 3,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J40",
+      "duration_slots": 3,
+      "release_slot": 10,
+      "deadline_slot": 22,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J41",
+      "duration_slots": 7,
+      "release_slot": 0,
+      "deadline_slot": 48,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    },
+    {
+      "id": "J42",
+      "duration_slots": 10,
+      "release_slot": 25,
+      "deadline_slot": 42,
+      "allowed_machines": [
+        "M6",
+        "M4",
+        "M5",
+        "M3",
+        "M1",
+        "M2"
+      ],
+      "priority": 0,
+      "units": 1,
+      "mandatory": true
+    }
+  ]
+}

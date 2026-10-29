@@ -1,0 +1,211 @@
+/* =========================================================
+   PeakShift Design Tokens  —  Step 1
+   Single source of truth. Never change a colour here unless
+   you also update DESIGN_LOCK.md.
+   ========================================================= */
+
+/* ── Local font faces (zero CDN) ── */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/Inter-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/Inter-Medium.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('../fonts/Inter-SemiBold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/Inter-Bold.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/JetBrainsMono-Regular.woff2') format('woff2');
+}
+
+/* ── Dark theme (default) ── */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Backgrounds */
+  --bg-base:       #0a0e17;
+  --bg-surface:    #111827;
+  --bg-card:       #1e2637;
+  --bg-card-hover: #28354a;
+  --bg-hover:      #374151;
+  --bg-input:      #111827;
+
+  /* Borders */
+  --border-default: #374151;
+  --border-subtle:  #1f2937;
+  --border-accent:  #3b82f6;
+  --ring-focus:     #3b82f6;
+
+  /* Text — all ≥ 4.5:1 on their card/surface background */
+  --text-primary:   #f1f5f9;   /* 15.7:1 on --bg-card */
+  --text-secondary: #cbd5e1;   /* 8.2:1  on --bg-card */
+  --text-muted:     #94a3b8;   /* 4.6:1  on --bg-card */
+  --text-inverse:   #0f172a;
+
+  /* Machine / Gantt states  (colour-blind safe + pattern fallback) */
+  --state-run:     #34d399;   /* emerald — running   */
+  --state-idle:    #60a5fa;   /* sky blue — idle      */
+  --state-warmup:  #fbbf24;   /* amber   — warmup     */
+  --state-off:     #475569;   /* slate   — switched-off (+ hatching) */
+  --state-failed:  #f87171;   /* red     — failed machine (+ hatching) */
+
+  /* Tariff band overlays */
+  --tariff-peak-bg:    rgba(239,  68,  68, 0.18);
+  --tariff-normal-bg:  rgba( 59, 130, 246, 0.08);
+  --tariff-offpeak-bg: rgba( 16, 185, 129, 0.12);
+
+  /* Status / badge palette */
+  --badge-success-bg:   #064e3b;
+  --badge-success-text: #a7f3d0;
+  --badge-success-border: rgba(16, 185, 129, 0.4);
+
+  --badge-danger-bg:    #7f1d1d;
+  --badge-danger-text:  #fecaca;
+  --badge-danger-border: rgba(239, 68, 68, 0.4);
+
+  --badge-warning-bg:    #78350f;
+  --badge-warning-text:  #fde68a;
+  --badge-warning-border: rgba(245, 158, 11, 0.4);
+
+  --badge-info-bg:    #1e3a8a;
+  --badge-info-text:  #bfdbfe;
+  --badge-info-border: rgba(59, 130, 246, 0.4);
+
+  /* Slider track fill (used with JS to paint progress) */
+  --slider-track:  #374151;
+  --slider-thumb:  #38bdf8;
+  --slider-fill:   #0ea5e9;
+}
+
+/* ── Light theme ── */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg-base:       #f8fafc;
+  --bg-surface:    #ffffff;
+  --bg-card:       #f1f5f9;
+  --bg-card-hover: #e2e8f0;
+  --bg-hover:      #e2e8f0;
+  --bg-input:      #ffffff;
+
+  --border-default: #cbd5e1;
+  --border-subtle:  #e2e8f0;
+  --border-accent:  #2563eb;
+  --ring-focus:     #2563eb;
+
+  --text-primary:   #0f172a;   /* 19.6:1 on --bg-card light */
+  --text-secondary: #334155;   /* 8.9:1  on --bg-card light */
+  --text-muted:     #64748b;   /* 4.6:1  on --bg-card light */
+  --text-inverse:   #f8fafc;
+
+  --state-run:     #059669;
+  --state-idle:    #2563eb;
+  --state-warmup:  #d97706;
+  --state-off:     #94a3b8;
+  --state-failed:  #dc2626;
+
+  --tariff-peak-bg:    rgba(220,  38,  38, 0.10);
+  --tariff-normal-bg:  rgba( 37,  99, 235, 0.06);
+  --tariff-offpeak-bg: rgba(  5, 150, 105, 0.08);
+
+  --badge-success-bg:   #d1fae5;
+  --badge-success-text: #065f46;
+  --badge-success-border: rgba(5, 150, 105, 0.4);
+
+  --badge-danger-bg:    #fee2e2;
+  --badge-danger-text:  #991b1b;
+  --badge-danger-border: rgba(220, 38, 38, 0.4);
+
+  --badge-warning-bg:    #fef3c7;
+  --badge-warning-text:  #92400e;
+  --badge-warning-border: rgba(217, 119, 6, 0.4);
+
+  --badge-info-bg:    #dbeafe;
+  --badge-info-text:  #1e40af;
+  --badge-info-border: rgba(37, 99, 235, 0.4);
+
+  --slider-track: #cbd5e1;
+  --slider-thumb: #2563eb;
+  --slider-fill:  #3b82f6;
+}
+
+/* ── Typography ── */
+:root {
+  /* Font stacks */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system,
+               BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+               Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo,
+               Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+  /* Type scale  12 / 14 / 16 / 20 / 28 / 40 px */
+  --text-xs:  0.75rem;    /* 12 */
+  --text-sm:  0.875rem;   /* 14 */
+  --text-md:  1rem;       /* 16 */
+  --text-lg:  1.25rem;    /* 20 */
+  --text-xl:  1.75rem;    /* 28 */
+  --text-2xl: 2.5rem;     /* 40 */
+
+  /* Line heights */
+  --lh-tight:  1.2;
+  --lh-snug:   1.35;
+  --lh-normal: 1.5;
+
+  /* Spacing — multiples of 8 px */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* Border radius */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-full: 9999px;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.45);
+
+  /* Layout */
+  --max-width: 1440px;
+  --header-h:  56px;
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,4 @@
+id,run_kw,idle_kw,restart_kwh
+M1,20,8,8
+M2,20,8,8
+M3,30,12,15

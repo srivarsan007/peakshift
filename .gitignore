@@ -1,0 +1,39 @@
+# Python
+.venv/
+env/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node & Browser Test artifacts
+node_modules/
+.npm/
+
+# Operating System
+.DS_Store
+Thumbs.db
+
+# Secrets & Environment variables
+.env
+.env.*
+!.env.example
+
+# Logs & Temporary Files
+*.log
+/tmp/
+.system_generated/
+*.zip
+*.tar.gz
+
+# Agent and internal tooling directories
+.agents/
+
+# Compatibility shim
+/api/

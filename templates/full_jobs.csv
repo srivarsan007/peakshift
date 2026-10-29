@@ -1,0 +1,7 @@
+id,duration_slots,release_slot,deadline_slot,allowed_machines,priority,units,mandatory
+J1,4,0,24,M1;M2,1,10,true
+J2,6,0,48,,0,12,true
+J3,3,10,30,M3,1,5,true
+J4,5,0,48,M1,0,8,false
+J5,4,20,40,M2;M3,0,6,true
+J6,2,0,16,,2,4,true

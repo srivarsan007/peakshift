@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: peakshift
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn peakshift.api.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: PEAKSHIFT_ITER
+        value: "60000"
+      - key: PEAKSHIFT_REFINE
+        value: "off"
