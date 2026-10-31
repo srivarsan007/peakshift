@@ -59,6 +59,9 @@ async function openCDP() {
   for (let i = 0; i < 30; i++) {
     try {
       const list = await fetchJson(`http://127.0.0.1:${DBG_PORT}/json`);
+      if (i === 0 || i % 5 === 0) {
+        console.log(`[CDP discovery attempt ${i + 1}] targets found:`, (list || []).map(t => `${t.type}:${t.url || ''}`));
+      }
       const page = list.find((t) => t.type === "page" && t.url && t.url.includes("http") && t.webSocketDebuggerUrl)
         || list.find((t) => t.type === "page" && t.webSocketDebuggerUrl)
         || list.find((t) => t.webSocketDebuggerUrl);
@@ -104,10 +107,16 @@ async function openCDP() {
                 sock.close();
               },
             });
-          sock.onerror = rej;
+          sock.onerror = (e) => {
+            rej(new Error(`WebSocket connection failed: ${e && (e.message || e.type) ? (e.message || e.type) : 'unknown error'}`));
+          };
         });
       }
-    } catch (_) {}
+    } catch (err) {
+      if (i % 5 === 0) {
+        console.log(`[CDP connect attempt ${i + 1}] error:`, err.message);
+      }
+    }
     await sleep(400);
   }
   throw new Error("Could not connect to Chrome CDP");
