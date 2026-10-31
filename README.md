@@ -2,8 +2,6 @@
 
 PeakShift is an open-source, energy-aware industrial production scheduling platform that shifts factory load away from expensive peak electricity tariff windows. An independent verifier checks deadline compliance, machine conflicts, and downtime blackouts on every schedule. Operating entirely offline without external cloud dependencies, it combines multi-heuristic constructive search, relational local optimization, and an independent physical constraint verifier. Energy cost savings against an always-on baseline range from about 3% near full load to about 50% at light load; the exact figures for each test case are in [test_cases/RESULTS.md](test_cases/RESULTS.md).
 
-**Live Application:** [https://peakshift.onrender.com](https://peakshift.onrender.com)
-
 ![PeakShift Production Schedule & Energy Optimization](docs/screenshots/02_compare_page.png)
 
 ---
@@ -62,7 +60,7 @@ Detailed execution benchmarks are available in [test_cases/RESULTS.md](test_case
 | **TC04** | European Textile Export | Semicolon CSV | Semicolon delimiters with UTF-8 BOM (`\ufeff`) | Delimiter auto-detected, target met, verifier green |
 | **TC05** | Complete Feature Showcase | JSON | 3 machines, 10 jobs, planned downtime, warm-up, switch caps | Target met, verifier green, compact demonstration |
 | **TC06** | Outage & Priority Windows | JSON | High load (0.8); machine M3 down slots 20–28; 3 urgent orders | Target met, zero jobs on M3 during outage, urgent jobs placed |
-| **TC07** | Low Load Peak Shifting | JSON | Textile mill at 30% load factor | Target met, ~50% energy savings through peak avoidance |
+| **TC07** | Low Load Peak Shifting | JSON | Textile mill at 30% load factor | Target met, ~50% energy savings by switching idle machines off during light load |
 | **TC08** | Overloaded Capacity Alert | JSON | 10 jobs of 12 slots on 2 machines (120 slots needed > 96 cap) | "Target at risk" banner with unplaced jobs; never reports false success |
 | **TC09** | Missing Column Validation | CSV Pair | Machines CSV missing required `restart_kwh` column | HTTP 422; readable error stating missing column |
 | **TC10** | Machine Affinity Validation | JSON | Job restricted to non-existent machine `M99` | HTTP 422; readable error naming job `J5` and machine `M99` |
