@@ -59,6 +59,11 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Verify Google Chrome installation
+        run: |
+          which google-chrome || which chromium-browser || which chromium || true
+          google-chrome --version || chromium-browser --version || true
+
       - name: Start PeakShift API server
         run: |
           uvicorn peakshift.api.main:app --host 0.0.0.0 --port 8000 &

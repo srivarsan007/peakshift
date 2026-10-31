@@ -543,7 +543,8 @@ async function runTestCase(cdp, tc) {
 async function main() {
   console.log(`Starting PeakShift E2E Browser Upload Check against ${BASE_URL}...\n`);
 
-  const chrome = spawn(chromeBin(), [
+  const bin = chromeBin();
+  const chrome = spawn(bin, [
     `--remote-debugging-port=${DBG_PORT}`,
     "--headless=new",
     "--no-sandbox",
@@ -554,7 +555,17 @@ async function main() {
     "--user-data-dir=/tmp/peakshift_chrome_e2e",
     "--window-size=1366,768",
     BASE_URL,
-  ], { stdio: "ignore" });
+  ]);
+
+  chrome.on("error", (err) => {
+    console.error(`Chrome process spawn error (${bin}):`, err);
+  });
+  if (chrome.stderr) {
+    chrome.stderr.on("data", (d) => {
+      const msg = d.toString().trim();
+      if (msg) console.error(`[chrome stderr] ${msg}`);
+    });
+  }
 
   process.on("exit", () => {
     try { chrome.kill(); } catch (_) {}
